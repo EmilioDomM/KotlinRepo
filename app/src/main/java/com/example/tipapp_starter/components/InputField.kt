@@ -12,6 +12,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
 @Composable
 fun InputField(
     modifier: Modifier = Modifier,
@@ -20,10 +21,10 @@ fun InputField(
     enabled: Boolean = true,
     isSingleLine: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next)
-){
+) {
     OutlinedTextField(
         value = valueState.value,
-        onValueChange = {valueState.value = it},
+        onValueChange = { valueState.value = it },
         label = { Text(text = labelId) },
         singleLine = isSingleLine,
         textStyle = androidx.compose.ui.text.TextStyle(fontSize = 18.sp),
@@ -33,5 +34,4 @@ fun InputField(
         enabled = enabled,
         keyboardOptions = keyboardOptions
     )
-
 }
