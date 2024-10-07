@@ -1,6 +1,7 @@
 package com.example.tipapp_starter.utils
 
 
+
 fun calculateTotalTip(totalBill: Double, tipPercentage: Int): Double {
 
     return if (totalBill > 1 && totalBill.toString().isNotEmpty())

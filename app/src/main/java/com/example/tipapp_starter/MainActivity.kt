@@ -1,7 +1,6 @@
 package com.example.tipapp_starter
 
 import android.os.Bundle
-import android.transition.Slide
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -22,7 +21,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AddAPhoto
@@ -47,7 +45,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.SemanticsActions.OnClick
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
@@ -84,7 +81,8 @@ fun TopHeader(totalPerPerson: Double = 0.0) {
             .height(150.dp)
             .clip(shape = RoundedCornerShape(corner = CornerSize(12.dp))),
         color = Color(0XFFE9D7F7)
-    ) {
+    )
+    {
         Column(
             modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -97,7 +95,9 @@ fun TopHeader(totalPerPerson: Double = 0.0) {
                 fontWeight = FontWeight.ExtraBold
             )
         }
+
     }
+
 }
 
 @Preview(showBackground = true)
@@ -112,6 +112,7 @@ fun TipApp(modifier: Modifier = Modifier) {
     val tipPercentage = (sliderPositionState.value).toInt()
 
 
+
     Column(modifier = modifier.padding(all = 12.dp)) {
 
         TopHeader(totalPerPerson = totalPerPersonState.value)
@@ -121,13 +122,16 @@ fun TipApp(modifier: Modifier = Modifier) {
                 .padding(2.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(corner = CornerSize(8.dp)),
-            border = BorderStroke(width = 3.dp, color = Color.LightGray)
-        ) {
+            border = BorderStroke(width = 1.dp, color = Color.LightGray)
+        )
+        {
+
             Column(
                 modifier = Modifier.padding(6.dp),
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start
             ) {
+
                 InputField(
                     valueState = totalBillState,
                     labelId = "Enter Bill"
@@ -136,12 +140,11 @@ fun TipApp(modifier: Modifier = Modifier) {
                 Row(
                     modifier = Modifier.padding(3.dp),
                     horizontalArrangement = Arrangement.Start
-                ) {
-                    Text(
-                        "Split",
-                        fontSize = 15.sp,
-                        modifier = Modifier.align(alignment = Alignment.CenterVertically)
-                    )
+                )
+
+                {
+
+                    Text("Split", modifier = Modifier.align(alignment = Alignment.CenterVertically))
                     Spacer(modifier = Modifier.width(120.dp))
                     RoundedIconButton(
                         imageVector = Icons.Default.Remove,
@@ -156,22 +159,25 @@ fun TipApp(modifier: Modifier = Modifier) {
                         borderColor = Color.LightGray
                     )
                     Text(
-                        "${splitNumber.value}",
-                        fontSize = 15.sp,
+                        "${splitNumber.value}", fontSize = 20.sp,
                         modifier = Modifier.align(alignment = Alignment.CenterVertically)
                     )
                     RoundedIconButton(
                         imageVector = Icons.Default.Add,
                         onClick = {
                             splitNumber.value++
+
                             totalPerPersonState.value = calculateTotalPerPerson(
                                 totalBill = totalBillState.value.toDouble(),
                                 splitBy = splitNumber.value,
                                 tipPercentage = tipPercentage
                             )
+
+
                         },
                         borderColor = Color.LightGray
                     )
+
 
                 }
 
@@ -179,13 +185,12 @@ fun TipApp(modifier: Modifier = Modifier) {
                     modifier = Modifier.padding(3.dp),
                     horizontalArrangement = Arrangement.Start
                 ) {
-                    Text("Tip", fontSize = 15.sp)
-                    Spacer(modifier = Modifier.padding(150.dp))
-                    Text(
-                        "${tipPercentage}%",
-                        fontSize = 15.sp,
-                    )
+                    Text("Tip")
+                    Spacer(modifier = Modifier.width(200.dp))
+                    Text(text = "$${tipPercentage} %")
+
                 }
+
 
                 Slider(
                     value = sliderPositionState.value,
@@ -207,11 +212,10 @@ fun TipApp(modifier: Modifier = Modifier) {
                 )
 
             }
+
         }
 
     }
-
-
 }
 
 
